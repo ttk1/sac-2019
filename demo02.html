@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <title>demo02</title>
+</head>
+
+<body>
+  <canvas id="canvas"></canvas>
+  <script src="./dot.js"></script>
+  <script>
+    window.onload = () => {
+      const canvas = document.getElementById('canvas');
+      canvas.width = 500;
+      canvas.height = 500;
+
+      const ctx = canvas.getContext('2d');
+
+      function f(dot, count) {
+        if (count == 0) {
+          ctx.beginPath();
+          ctx.arc(dot.x * 500, dot.y * 500, 0.5, 0, 2 * Math.PI, true);
+          ctx.stroke();
+        } else {
+          dot = dot.scale(1 / Math.sqrt(2));
+          f(dot.rotate(-Math.PI / 4), count - 1);
+          f(dot.rotate(-Math.PI * 3 / 4).translate(1, 1), count - 1);
+        }
+      }
+      f(new Dot(0.5, 0.5), 15);
+    }
+  </script>
+  <p>View on GitHub: <a href="https://github.com/ttk1/sac-2019">https://github.com/ttk1/sac-2019</a></p>
+</body>
+
+</html>
